@@ -86,6 +86,8 @@ spec:
         # TODO: move this to a secret?
         - name: PLEX_CLAIM
           value: "{{ .Values.claimToken }}"
+        - name: ADVERTISE_IP
+          value: "{{ .Values.advertiseIP }}"
         # kube-plex env vars
         - name: PMS_INTERNAL_ADDRESS
           value: http://{{ template "fullname" . }}:32400
