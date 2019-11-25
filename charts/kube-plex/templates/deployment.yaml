@@ -43,12 +43,12 @@ spec:
           mountPath: /shared
 {{- end }}
       containers:
-      securityContext:
-        runAsUser: 1000
-        runAsGroup: 1000
       - name: plex
         image: "{{ .Values.image.repository }}:{{ .Values.image.tag }}"
         imagePullPolicy: {{ .Values.image.pullPolicy }}
+        securityContext:
+          runAsUser: 1000
+          runAsGroup: 1000
 {{- if .Values.kubePlex.enabled }}
         # We replace the PMS binary with a postStart hook to save having to
         # modify the default image entrypoint.
