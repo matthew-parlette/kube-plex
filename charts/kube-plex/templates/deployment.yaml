@@ -8,9 +8,6 @@ metadata:
     release: {{ .Release.Name }}
     heritage: {{ .Release.Service }}
 spec:
-  securityContext:
-    runAsUser: 1000
-    runAsGroup: 1000
   replicas: 1
   strategy:
     type: Recreate
@@ -46,6 +43,9 @@ spec:
           mountPath: /shared
 {{- end }}
       containers:
+      securityContext:
+        runAsUser: 1000
+        runAsGroup: 1000
       - name: plex
         image: "{{ .Values.image.repository }}:{{ .Values.image.tag }}"
         imagePullPolicy: {{ .Values.image.pullPolicy }}
