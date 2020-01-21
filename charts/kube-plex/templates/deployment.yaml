@@ -8,6 +8,8 @@ metadata:
     release: {{ .Release.Name }}
     heritage: {{ .Release.Service }}
 spec:
+  securityContext:
+    privileged: true
   replicas: 1
   strategy:
     type: Recreate
