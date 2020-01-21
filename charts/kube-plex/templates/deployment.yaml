@@ -8,8 +8,6 @@ metadata:
     release: {{ .Release.Name }}
     heritage: {{ .Release.Service }}
 spec:
-  securityContext:
-    privileged: true
   replicas: 1
   strategy:
     type: Recreate
@@ -29,6 +27,8 @@ spec:
         {{- end }}
       {{- end }}
     spec:
+      securityContext:
+        privileged: true
       serviceAccountName: {{ if .Values.rbac.create }}{{ template "fullname" . }}{{ else }}{{ .Values.rbac.serviceAccountName | quote }}{{ end }}
       hostname: "{{ template "fullname" . }}"
 {{- if .Values.kubePlex.enabled }}
