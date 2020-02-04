@@ -49,6 +49,11 @@ spec:
       - name: plex
         image: "{{ .Values.image.repository }}:{{ .Values.image.tag }}"
         imagePullPolicy: {{ .Values.image.pullPolicy }}
+        env:
+        - name: PUID
+          value: 1000
+        - name: PGID
+          value: 1000
 {{- if .Values.kubePlex.enabled }}
         # We replace the PMS binary with a postStart hook to save having to
         # modify the default image entrypoint.
